@@ -4,7 +4,7 @@ word = 'zyxwvutsrqp'
 
 
 def longest_substring(s):
-    longest_count = 0
+    longest_count = 1
     longest_index = 0
     for letter in range(len(s)-1):
         count = 1
