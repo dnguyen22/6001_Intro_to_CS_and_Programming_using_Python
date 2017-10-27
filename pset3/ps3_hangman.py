@@ -77,7 +77,7 @@ def getAvailableLetters(lettersGuessed):
       yet been guessed.
     '''
 
-    alphabet = 'abcdefghijklmnopqrstuvqwxyz'
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
     available_letters = alphabet[:]
     for letter in lettersGuessed:
         available_letters = available_letters.replace(letter, '')
