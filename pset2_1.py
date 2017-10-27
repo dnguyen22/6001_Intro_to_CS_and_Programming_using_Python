@@ -15,13 +15,19 @@ def get_balance(balance, annualInterestRate, monthlyPaymentRate):
 
     return round(updatedBalance, 2)
 
+
 balance = 80
 annualInterestRate = 0.2
 monthlyPaymentRate = 0.04
 
 
-def find_min_fixed_monthly_payment():
-    pass
+def find_min_fixed_monthly_payment(balance, annualInterestRate):
+    """
+    Calculates monthlyPayment
+    :param balance:
+    :param annualInterestRate:
+    :return:
+    """
 
 
 def get_year_balance(balance, annualInterestRate, monthlyPaymentRate):
