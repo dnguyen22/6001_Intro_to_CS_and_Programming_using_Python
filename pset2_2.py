@@ -25,17 +25,28 @@ def find_min_fixed_monthly_payment(balance, annual_interest_rate):
 
         return current_balance
 
-    fixed_monthly_payment = 10
+    # Calculate minimum monthly payment via bisection
+    # Lower bound initialized to no interest case
+    monthly_payment_lower_bound = balance / 12
+    # Upper bound initialized to zero monthly payments case
+    monthly_payment_upper_bound = (balance * (1+(annual_interest_rate/12.0))**12) / 12.0
+    # Error tolerance
+    epsilon = 0.01
 
     while True:
-        if year_end_balance(balance, annual_interest_rate, fixed_monthly_payment) > 0:
-            # Fixed monthly payment increased by $10 to make balance 0 after 1 year
-            fixed_monthly_payment += 10
-        else:
-            return fixed_monthly_payment
+        mid = (monthly_payment_lower_bound + monthly_payment_upper_bound) / 2.0
+
+        if abs(year_end_balance(balance, annual_interest_rate, mid)) < epsilon:
+            return round(mid, 2)
+        elif year_end_balance(balance, annual_interest_rate, mid) > 0:
+            # Raise lower bound
+            monthly_payment_lower_bound = mid
+        elif year_end_balance(balance, annual_interest_rate, mid) < 0:
+            # Lower upper bound
+            monthly_payment_upper_bound = mid
 
 
-balance = 4773
+balance = 320000
 annualInterestRate = 0.2
 
 lowest_pay = find_min_fixed_monthly_payment(balance, annualInterestRate)
