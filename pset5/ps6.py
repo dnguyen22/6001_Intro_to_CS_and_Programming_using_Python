@@ -102,7 +102,14 @@ class Message(object):
         Returns: a dictionary mapping a letter (string) to 
                  another letter (string). 
         '''
-        pass #delete this line and replace with your code here
+        shift_dict = dict()
+        for i in range(len(string.ascii_lowercase)):
+            cipher_key = (ord(string.ascii_lowercase[i]) - ord('a') + shift) % 26
+            shift_dict[string.ascii_lowercase[i]] = chr(ord('a') + cipher_key)
+        for i in range(len(string.ascii_uppercase)):
+            cipher_key = (ord(string.ascii_uppercase[i]) - ord('A') + shift) % 26
+            shift_dict[string.ascii_uppercase[i]] = chr(ord('A') + cipher_key)
+        return shift_dict
 
     def apply_shift(self, shift):
         '''
@@ -116,7 +123,15 @@ class Message(object):
         Returns: the message text (string) in which every character is shifted
              down the alphabet by the input shift
         '''
-        pass #delete this line and replace with your code here
+        cipher_dict = self.build_shift_dict(shift)
+        cipher_text = ''
+
+        for letter in self.message_text:
+            if letter.isalpha():
+                cipher_text += cipher_dict[letter]
+            else:
+                cipher_text += letter
+        return cipher_text
 
 class PlaintextMessage(Message):
     def __init__(self, text, shift):
@@ -208,11 +223,16 @@ class CiphertextMessage(Message):
         pass #delete this line and replace with your code here
 
 #Example test case (PlaintextMessage)
-plaintext = PlaintextMessage('hello', 2)
-print('Expected Output: jgnnq')
-print('Actual Output:', plaintext.get_message_text_encrypted())
+#plaintext = PlaintextMessage('hello', 2)
+#print('Expected Output: jgnnq')
+#print('Actual Output:', plaintext.get_message_text_encrypted())
     
 #Example test case (CiphertextMessage)
-ciphertext = CiphertextMessage('jgnnq')
-print('Expected Output:', (24, 'hello'))
-print('Actual Output:', ciphertext.decrypt_message())
+#ciphertext = CiphertextMessage('jgnnq')
+#print('Expected Output:', (24, 'hello'))
+#print('Actual Output:', ciphertext.decrypt_message())
+
+mess = Message('hello')
+print(mess.build_shift_dict(2))
+print(mess.apply_shift(2))
+
