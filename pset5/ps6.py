@@ -251,8 +251,19 @@ class CiphertextMessage(Message):
 #print('Actual Output:', plaintext.get_message_text_encrypted())
     
 #Example test case (CiphertextMessage)
-ciphertext = CiphertextMessage('jgnnq')
-print('Expected Output:', (24, 'hello'))
-print('Actual Output:', ciphertext.decrypt_message())
+#ciphertext = CiphertextMessage('jgnnq')
+#print('Expected Output:', (24, 'hello'))
+#print('Actual Output:', ciphertext.decrypt_message())
+
+
+def decrypt_story():
+    story = get_story_string()
+    cipher_text = CiphertextMessage(story)
+    return cipher_text.decrypt_message()
+
+
+print(decrypt_story())
+
+
 
 
